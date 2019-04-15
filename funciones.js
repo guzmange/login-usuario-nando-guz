@@ -1,6 +1,6 @@
 <script> 
   function probando(){
-alert("hola");
+alert("hola, nando se la come doblada mal... (cyro)");
 
 }
   
