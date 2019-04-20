@@ -1,0 +1,27 @@
+function comprobarCI($cedi){
+//Inicializo los coefcientes en el orden correcto
+$arrCoefs = [2,9,8,7,6,3,4,1];
+$suma = 0;
+//Para el caso en el que la CI tiene menos de 8 digitos
+//calculo cuantos coeficientes no voy a usar
+$difCoef = count($arrCoefs) - strlen($cedi);
+//recorro cada digito empezando por el de más a la derecha
+//o sea, el digito verificador, el que tiene indice mayor en el array
+
+
+for($i=strlen($cedi) - 1; $i> -1;$i--){
+//ooObtengo el digito correspondiente de la ci recibida
+$dig = substr($cedi, $i, 1);
+//Lo tenía como caracter, lo transformo a int para poder operar
+//Obtengo el coeficiente correspondiente al ésta posición del digito
+$coef = $arrCoefs[$i+$difCoef];
+//Multiplico dígito por coeficiente y lo acumulo a la suma total
+$suma = $suma + $dig * $coef;
+}
+// si la suma es múltiplo de 10 es una ci válida
+if ( ($suma % 10) == 0 ) {
+return true;
+}else{
+return false;
+}
+}

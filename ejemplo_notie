@@ -1,0 +1,9 @@
+//para ubicar el notie
+
+//esto seria el uso comun y sale delante de todas las pantallas en la parte superior o de donde este seteado en las configuracion de la clase
+notie.alert({ type: 'warning', text: 'Debe estar registrado/logueado para continuar ' })
+
+//ahora lo uso dandole una ubicaicon
+
+$("div_donde_quiero_que_aparezca").notie.alert({ type: 'warning', text: 'Debe estar registrado/logueado para continuar ' })
+
