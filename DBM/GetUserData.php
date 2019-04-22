@@ -24,7 +24,7 @@ if(mysqli_num_rows($resultado)>0){
                                 perfil_usuarios AS pu
                             WHERE
                                 p.Id_Perfil=pu.Id_Perfil and
-                                pu.Id_Usuario = 3 limit 1"; 
+                                pu.Id_Usuario = $idUsuario limit 1"; 
 
         $resultadoProfile = mysqli_query($conexion,$queryProfile) or die("Sin resultados.");
 
@@ -49,8 +49,6 @@ if(mysqli_num_rows($resultado)>0){
                 $myObj->ProfileId = $profile['Id_Perfil'];
                 $myObj->Profile = $profile['perfil'];
 
-
-
                 $queryProfileList = "SELECT * FROM perfiles"; 
 
                 $resProfileList = mysqli_query($conexion,$queryProfileList) or die("Sin resultados.");
@@ -60,8 +58,8 @@ if(mysqli_num_rows($resultado)>0){
                     $profileList = '<select id="cmbProfile">';
 
                     while($fila = mysqli_fetch_assoc($resProfileList)){
-
-                        if($fila["Id_Perfil"]==$profile['Id_Perfil']){
+                        //TODO: no esta funcionando el if de select correctamente... en usuario 2 perfil 1 y muestra el select en perfil 3
+                        if($fila["Id_Perfil"]===$profile['Id_Perfil']){
                             $profileList =  $profileList . '<option value="'. $fila["Id_Perfil"].'" selected="true">'.$fila["Perfil"].'</option>';
                         }else{
                             $profileList =  $profileList . '<option value="'. $fila["Id_Perfil"].'">'.$fila["Perfil"].'</option>';

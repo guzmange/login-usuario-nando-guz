@@ -8,7 +8,7 @@
 //VARIABLES DE CONFIGURACION
 
 //url servidor
-var urlServer ="http://192.168.1.42/AdminUsu/www/dbm/";
+var urlServer ="http://192.168.1.5/AdminUsu/www/dbm/";
 //Largo de password mínimo utilizada en registro
 var passLength = 8;
 
@@ -90,6 +90,7 @@ function LogoffUser()
     $("#LoginButton").css("display", "inline"); //se muestra boton de login
     $("#SignUpButton").css("display", "inline");//se muestra boton de registro
     $("#btnLogOffUser").css("display", "none");//se oculta boton de logoff
+    $("#userName").html('');
     
 }
 //Funcion para verificar campos de usuario y clave antes de loguear usuario
@@ -269,7 +270,7 @@ function verifyEmail() {
 
 //Funcion que valida documento ingresado
 function verifyDocument()
-  {
+  {console.log("entra a verify document");
     var cedi = document.getElementById('document').value;
     if(cedi.length >= 7){
         //Inicializo los coefcientes en el orden correcto
@@ -426,8 +427,6 @@ function showUserList()
     });
 
 }
-
-
 //agrega el evento click al boton que cierra el modal de SignUp
 $(document).ready(function(){
     $("#btnCancelEditUser").click(function(){ 
@@ -455,6 +454,7 @@ function getUserData(id)
                 $('#userEdit').val(user.UserName);
                 $('#LastLoginEdit').val(user.LastLogin);
                 $('#confirmAccount').val(user.FirstLogin);
+    
                 //se carga listado de perfiles desde base de datos
                 $('#ProfileListContainer').html(user.ProfileList);
                 
@@ -485,7 +485,10 @@ function ProcessEditUser()
              if(resp.respuesta =='ok')
              {//si la actualizacion se lleva a cabo de forma exitosa se muestra mensaje
                 notie.alert({ type: 'success', text: 'El usuario se actualizo correctamente', time: 3, position: 'top' });  
-             }else if(resp.respuesta =='error')
+                //llamo a limpiar campos de edit user y a ocultar el modal
+                cleanFieldsEditUser();
+            
+            }else if(resp.respuesta =='error')
              {//Si se retornan errores se recorre el array de errores y se cargan los mensajes de error
                  var errores = resp.mensaje;
                  var msj ="";
@@ -502,6 +505,19 @@ function ProcessEditUser()
 
         }
     });
+}
+
+//funcion utilizada para limpiar campos de edit user y ocultar el modal
+function cleanFieldsEditUser()
+{
+    $('#userIdEdit').val('');
+    $('#nameEdit').val('');
+    $('#emailEdit').val('');
+    $('#documentEdit').val('');
+    $('#userEdit').val('');
+    $('#LastLoginEdit').val('');
+    $('#confirmAccount').val('');
+    $("#idModalEditUser").css("display", "none");
 }
 
 //funcion que resetea el password del usuario

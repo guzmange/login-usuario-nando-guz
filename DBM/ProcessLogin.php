@@ -38,7 +38,7 @@ if(mysqli_num_rows($resultado)>0){
     }
 }else
 { //si no se encuentra un usuario registrado con el nombre que se ingresa, se retorna error
-    $data = array(respuesta => "error", mensaje => "No existe usuario con dicho nombre");
+    $data = array(respuesta => "error", mensaje => "No existe usuario con dicho nombre, o la clave no es correcta");
     echo json_encode($data);
     exit();
 }
